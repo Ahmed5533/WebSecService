@@ -16,6 +16,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('products_list')}}">Products</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('employees.create')}}">Create-Employee</a>
+            </li>
+
+
             @can('show_users')
             <li class="nav-item">
                 <a class="nav-link" href="{{route('users')}}">Users</a>

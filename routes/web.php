@@ -25,16 +25,23 @@ Route::get('products/edit/{product?}', [ProductsController::class, 'edit'])->nam
 Route::post('products/save/{product?}', [ProductsController::class, 'save'])->name('products_save');
 Route::get('products/delete/{product}', [ProductsController::class, 'delete'])->name('products_delete');
 
+////////
+Route::get('/employees/create', [UsersController::class, 'createEmployee'])->name('employees.create');
+Route::post('/employees/store', [UsersController::class, 'storeEmployee'])->name('employees.store');
+/////////
+
+
 /////////// NewNew
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/employees/create', [UsersController::class, 'createEmployee'])->name('employees.create');
-    Route::post('/employees/store', [UsersController::class, 'storeEmployee'])->name('employees.store');
-});
+//Route::middleware(['auth', 'role:Admin'])->group(function () {
+  //  Route::get('/employees/create', [UsersController::class, 'createEmployee'])->name('employees.create');
+   // Route::post('/employees/store', [UsersController::class, 'storeEmployee'])->name('employees.store');
+//});
 ////////////
 
 
 Route::middleware(['auth'])->group(function () {
     // Route for listing customers
+
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
 
     // Route to show a form to add credit to a customer

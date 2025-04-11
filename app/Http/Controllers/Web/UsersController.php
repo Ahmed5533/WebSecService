@@ -171,11 +171,13 @@ class UsersController extends Controller {
 
     public function createEmployee()
     {
+        echo "you are in create employee";
         return view('users.create_employee');
     }
 
     public function storeEmployee(Request $request)
     {
+        echo "you are in store employee";
         $request->validate([
             'name' => 'required|string|min:5',
             'email' => 'required|email|unique:users',
@@ -190,7 +192,8 @@ class UsersController extends Controller {
 
         $user->assignRole('Employee'); // Assign Employee role
 
-        return redirect()->route('users')->with('success', 'Employee added successfully.');
+        return redirect('/');
+     //   return redirect()->route('users')->with('success', 'Employee added successfully.');
     }
 
     //////////////////
