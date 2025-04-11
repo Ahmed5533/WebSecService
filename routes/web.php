@@ -25,10 +25,18 @@ Route::get('products/edit/{product?}', [ProductsController::class, 'edit'])->nam
 Route::post('products/save/{product?}', [ProductsController::class, 'save'])->name('products_save');
 Route::get('products/delete/{product}', [ProductsController::class, 'delete'])->name('products_delete');
 
-////////
+//////// NEW
 Route::get('/employees/create', [UsersController::class, 'createEmployee'])->name('employees.create');
 Route::post('/employees/store', [UsersController::class, 'storeEmployee'])->name('employees.store');
-/////////
+///////// end of new
+
+
+
+
+///////////// New
+ Route::post('products/{product}/buy', [ProductsController::class, 'buy'])->name('products.buy');
+//////////// end of new
+
 
 
 /////////// NewNew

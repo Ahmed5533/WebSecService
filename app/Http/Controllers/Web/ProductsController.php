@@ -16,21 +16,39 @@ class ProductsController extends Controller {
     {
         $this->middleware('auth:web')->except('list');
     }
+/////// New
+    public function buy(Request $request, Product $product)
+    {
+        if (!auth()->check()) {
+            return redirect('/login');
+        }
 
+        if (!$product->in_stock) {
+            return redirect()->back()->with('error', 'This product is currently out of stock.');
+        }
+
+        // Mark product as out of stock after purchase
+        $product->in_stock = false;
+        $product->save();
+
+        return redirect()->back()->with('success', 'Thank you for your purchase!');
+    }
+
+///////////////
 	public function list(Request $request) {
 
 		$query = Product::select("products.*");
 
-		$query->when($request->keywords, 
+		$query->when($request->keywords,
 		fn($q)=> $q->where("name", "like", "%$request->keywords%"));
 
-		$query->when($request->min_price, 
+		$query->when($request->min_price,
 		fn($q)=> $q->where("price", ">=", $request->min_price));
-		
-		$query->when($request->max_price, fn($q)=> 
+
+		$query->when($request->max_price, fn($q)=>
 		$q->where("price", "<=", $request->max_price));
-		
-		$query->when($request->order_by, 
+
+		$query->when($request->order_by,
 		fn($q)=> $q->orderBy($request->order_by, $request->order_direction??"ASC"));
 
 		$products = $query->get();
@@ -93,4 +111,4 @@ class ProductsController extends Controller {
 		$this->authorize('delete', $product);
 		// Product deletion logic
 	}
-} 
+}
