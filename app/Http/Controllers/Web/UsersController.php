@@ -190,7 +190,7 @@ class UsersController extends Controller {
         $user->password = bcrypt($request->password);
         $user->save();
 
-        $user->assignRole('Employee'); // Assign Employee role
+     $user->assignRole('Employee'); // Assign Employee role
 
         return redirect('/');
      //   return redirect()->route('users')->with('success', 'Employee added successfully.');
